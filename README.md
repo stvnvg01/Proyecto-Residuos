@@ -2,7 +2,7 @@
 
 ¡Bienvenido a **Proyecto-Residuos**! 🌱
 
-Es una aplicación web construida con Laravel que permite gestionar y registrar recolecciones de residuos, incentivando a los usuarios con un sistema de bonos por cada recolección realizada.
+Una aplicación web construida con Laravel para gestionar y registrar recolecciones de residuos, ofreciendo bonos como incentivo por cada actividad. Este proyecto forma parte de mi portafolio profesional.
 
 ---
 
@@ -11,21 +11,22 @@ Es una aplicación web construida con Laravel que permite gestionar y registrar 
 * Formulario web responsive para registro de recolecciones.
 * Cálculo y asignación automática de bonos según cantidad y tipo de residuo.
 * Panel de administración para revisión y seguimiento de solicitudes.
+* Ejemplo de base de datos en MySQL exportada desde **phpMyAdmin**.
 
 ---
 
-## ✨ Características principales
+## ✨ Características
 
-* Registro y autenticación de usuarios (login / register).
-* Validación de datos en formularios con mensajes de error claros.
-* Migraciones y seeders para estructura de base de datos.
-* Sistema de roles (usuario / administrador).
-* Panel de administración con listado de recolecciones.
-* Diseño limpio y flexible usando Blade + TailwindCSS (o Bootstrap).
+* **Autenticación** de usuarios (registro / inicio de sesión).
+* **Validación** de formularios con mensajes claros.
+* **Migraciones** y **seeders** para estructura de base de datos.
+* **Roles**: usuario y administrador.
+* Panel de administrador con listado y gestión de recolecciones.
+* Vistas con Blade y estilo con TailwindCSS (o Bootstrap).
 
 ---
 
-## 🚀 Prerrequisitos
+## 🚀 Requisitos previos
 
 * PHP >= 8.0
 * Composer
@@ -35,44 +36,47 @@ Es una aplicación web construida con Laravel que permite gestionar y registrar 
 
 ---
 
-## 🔧 Instalación
+## 🔧 Instalación y configuración
 
-1. Clona el repositorio:
+1. **Clona el repositorio**
 
    ```bash
    git clone https://github.com/stvnvg01/Proyecto-Residuos.git
    cd Proyecto-Residuos
    ```
-2. Instala dependencias de PHP:
+2. **Instala dependencias de PHP**
 
    ```bash
    composer install
    ```
-3. Copia y configura el archivo de entorno:
+3. **Configura el entorno**
 
    ```bash
    cp .env.example .env
    php artisan key:generate
    ```
-4. Ajusta en `.env` los datos de conexión a la base de datos:
+4. **Ajusta las credenciales** en `.env`:
 
-   ```env
-   DB_DATABASE=nombre_base
-   DB_USERNAME=tu_usuario
+   ```dotenv
+   DB_CONNECTION=mysql
+   DB_HOST=127.0.0.1
+   DB_PORT=3306
+   DB_DATABASE=proyecto_residuos_local
+   DB_USERNAME=root
    DB_PASSWORD=tu_contraseña
    ```
-5. Instala assets de frontend:
+5. **Instala assets de frontend**
 
    ```bash
    npm install
    npm run dev
    ```
-6. Ejecuta migraciones:
+6. **Ejecuta migraciones y seeders** (opcional si usas dump SQL):
 
    ```bash
    php artisan migrate --seed
    ```
-7. Inicia el servidor local:
+7. **Inicia el servidor**
 
    ```bash
    php artisan serve
@@ -82,12 +86,33 @@ La aplicación quedará disponible en `http://localhost:8000`.
 
 ---
 
+## 🗄️ Base de datos de ejemplo
+
+Para facilitar pruebas rápidas, incluimos un dump de MySQL exportado desde **phpMyAdmin**. Es un ejemplo que puedes importar en tu entorno local o en la nube.
+
+1. **Ubicación**: `database/proyecto_residuos_dump.sql`
+2. **Crear base de datos vacía**:
+
+   ```sql
+   CREATE DATABASE proyecto_residuos_local CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+   ```
+3. **Importar el dump**:
+
+   ```bash
+   mysql -u root -p proyecto_residuos_local < database/proyecto_residuos_dump.sql
+   ```
+4. **Verifica las credenciales** en tu `.env` (punto 4 arriba).
+
+> ⚠️ El archivo SQL **solo** es un ejemplo de datos. No contiene información sensible.
+
+---
+
 ## 💼 Uso
 
-* Regístrate o inicia sesión.
-* Completa el formulario de recolección indicando tipo y cantidad de residuo.
-* Consulta tu historial de bonos en el perfil.
-* Como administrador, revisa y aprueba las solicitudes desde el panel de administrador.
+1. Regístrate o inicia sesión.
+2. Completa el formulario de recolección indicando tipo y cantidad.
+3. Revisa tu historial de bonos en el perfil.
+4. Como administrador, gestiona solicitudes desde el panel.
 
 ---
 
@@ -95,20 +120,20 @@ La aplicación quedará disponible en `http://localhost:8000`.
 
 ```
 app/           # Lógica de negocio y modelos
-bootstrap/     # Archivos de arranque de Laravel
+bootstrap/     # Arranque de Laravel
 config/        # Configuraciones
-database/      # Migraciones y seeders
-public/        # Entrada pública (index.php, assets)
-resources/     # Vistas Blade, archivos de estilo y scripts
+database/      # Migraciones, seeders y dump de ejemplo
+public/        # Entrada pública y assets
+resources/     # Vistas Blade, CSS y JS
 routes/        # Definición de rutas
-storage/       # Logs, caché y archivos generados
+storage/       # Logs, caché y subidas
 tests/         # Pruebas unitarias y de integración
-vendor/        # Dependencias instaladas por Composer
+vendor/        # Dependencias Composer
 ```
 
 ---
 
-## 🧪 Tests
+## 🧪 Pruebas
 
 Ejecuta todas las pruebas con:
 
@@ -120,19 +145,18 @@ php artisan test
 
 ## 🤝 Contribuciones
 
-1. Haz un fork del repositorio.
-2. Crea una rama con tu feature: `git checkout -b feature/nombre`
-3. Realiza tus cambios y commitea: `git commit -m "Descripción del cambio"`
-4. Haz push a tu rama: `git push origin feature/nombre`
-5. Abre un Pull Request en GitHub.
+1. Haz fork y clona tu rama.
+2. Crea un branch: `git checkout -b feature/nombre`.
+3. Realiza cambios y commitea: `git commit -m "Descripción"`.
+4. Sube tu rama: `git push origin feature/nombre`.
+5. Abre un Pull Request.
 
 ---
 
 ## 📄 Licencia
 
-Este proyecto está licenciado bajo la [MIT License](LICENSE).
+Licencia MIT. ¡Contribuye y ayuda a mejorar la gestión de residuos!
 
 ---
 
-> Creado por **stvnvg01** · ¡Gracias por contribuir y mejorar la gestión de residuos!
-
+> Creado por **stvnvg01** · Más info en [stvnvg01](https://github.com/stvnvg01)
